@@ -4,8 +4,8 @@
 #include <locale.h>
 
 
-const int MAX=15;// limitando o tamanho do vetor
-int ordenado = 0;// vari·vel p/ controlar a ordenaÁ„o dos dados
+const int MAX=5;// limitando o tamanho do vetor
+int ordenado = 0;// vari√°vel p/ controlar a ordena√ß√£o dos dados
 
 // Tipo de dado especial (Registro)
 typedef struct TProduto{
@@ -16,11 +16,11 @@ typedef struct TProduto{
 }Tproduto;
 // Escopo do programa
 void leitura(Tproduto estoque[], int *tamanho);//gera o arquivo .dat na primeira vez
-void gravacao(Tproduto estoque[], int tamanho);// realiza a gravaÁ„o dos dado no arquivo
-int pesquisa(Tproduto estoque[], int codigo, int *tamanho);// busca e retorna a posiÁ„o do produto no vetor
+void gravacao(Tproduto estoque[], int tamanho);// realiza a grava√ß√£o dos dado no arquivo
+int pesquisa(Tproduto estoque[], int codigo, int *tamanho);// busca e retorna a posi√ß√£o do produto no vetor
 int pesquisabinaria(Tproduto estoque[], int chave, int tamanho);
-int vazio(int tamanho);// funÁ„o auxiliar para da pesquisa bin·ria
-void ordena(Tproduto estoque[], int tamanho); //ordena o cadastro dos produtos por cÛdigo
+int vazio(int tamanho);// fun√ß√£o auxiliar para da pesquisa bin√°ria
+void ordena(Tproduto estoque[], int tamanho); //ordena o cadastro dos produtos por c√≥digo
 void cadastrar(Tproduto estoque[], int *tamanho); //faz o cadastro dos produtos
 
 // Relatorios
@@ -41,12 +41,12 @@ int main(){
     leitura(estoque, &tamanho);// abre o arquivo da base de dados
     do{
         printf ("------------------------------------------------------------\n");
-		printf ("             CONTROLE DE COMPRA - ALIMENTA«√O               \n");
+		printf ("             CONTROLE DE COMPRA - ALIMENTA√á√ÉO               \n");
 		printf ("------------------------------------------------------------\n");
 		printf ("0 - SAIR\n");
         printf ("1 - Cadastrar\n");
-        printf ("2 - RelatÛrio Geral\n");
-        printf ("3 - RelatÛrio por categoria\n");
+        printf ("2 - Relat√≥rio Geral\n");
+        printf ("3 - Relat√≥rio por categoria\n");
     	printf ("4 - Custo total\n");
         printf ("\nESCOLHA A OPCAO DESEJADA:\n");
         scanf ("%d",&opcao);
@@ -77,14 +77,14 @@ int main(){
             default: printf("OPCAO INVALIDA!");
         }
     }while (opcao!=0);
-             gravacao(estoque, tamanho);// grava apÛs realizada as operaÁıes
+             gravacao(estoque, tamanho);// grava ap√≥s realizada as opera√ß√µes
 	return 0;
 }
 
 
 void leitura(Tproduto estoque[], int *tamanho){
     FILE *arquivo;
-  	arquivo= fopen("estoque.dat", "a+b");	   /* abrimos para anexar, bin·rio */ 
+  	arquivo= fopen("estoque.dat", "a+b");	   /* abrimos para anexar, bin√°rio */ 
   	if (!arquivo){
   		printf("Erro ao abrir arquivo!");
   		return;
@@ -104,7 +104,7 @@ void leitura(Tproduto estoque[], int *tamanho){
 void gravacao(Tproduto estoque[], int tamanho){
     FILE *arquivo;
     int i;
-    arquivo= fopen("estoque.dat", "w+b");	   /* abre e apaga o conte˙do do arquivo,bin·rio */ 
+    arquivo= fopen("estoque.dat", "w+b");	   /* abre e apaga o conte√∫do do arquivo,bin√°rio */ 
   	if (!arquivo){
   		printf("Erro ao abrir arquivo!");
   		return;
@@ -135,7 +135,7 @@ int pesquisabinaria(Tproduto estoque[], int chave, int tamanho){
         else
            final=meio-1;
     }
-    return -1; // n„o encontrou
+    return -1; // n√£o encontrou
 }
 
 
@@ -178,7 +178,7 @@ void ordena(Tproduto estoque[], int tamanho){
 void cadastrar(Tproduto estoque[], int *tamanho){
 	Tproduto aux;
 	
-	//Verifica se o arquivo est· cheio
+	//Verifica se o arquivo est√° cheio
 	if(*tamanho == MAX){
 		printf("Arquivo cheio! \n");
 		return;
@@ -186,17 +186,17 @@ void cadastrar(Tproduto estoque[], int *tamanho){
 	
 	// solicita o codigo do produto
 	do{
-		printf("CÛdigo do produto--------------------------: ");
+		printf("C√≥digo do produto--------------------------: ");
 		scanf("%ld", &aux.codigo);
 		fflush(stdin);
 		
 		if(aux.codigo < 0){
-			printf("O cÛdigo n„o pode ser negativo.\n");
+			printf("O c√≥digo n√£o pode ser negativo.\n");
 		}	
 		
 	}while(aux.codigo < 0);
 	
-	// Verifica se j· existe um produto com o mesmo cÛdigo
+	// Verifica se j√° existe um produto com o mesmo c√≥digo
 	if(pesquisa(estoque, aux.codigo, tamanho) > 0){
 		printf("\nPRODUTO JA EXISTE\n");
 		return;	
@@ -208,19 +208,19 @@ void cadastrar(Tproduto estoque[], int *tamanho){
 		gets(aux.nome);
 		fflush(stdin);
 		if(aux.nome[0] == '\0'){
-			printf("O campo nome n„o pode ser vazio. \n");	
+			printf("O campo nome n√£o pode ser vazio. \n");	
 		}
 		
 	}while(aux.nome[0] == '\0');
 	
 	
-	// EspecificaÁ„o do produto
+	// Especifica√ß√£o do produto
 	do{
-		printf("EspecificaÁ„o------------------------------: ");
+		printf("Especifica√ß√£o------------------------------: ");
 		gets(aux.desc);
 		fflush(stdin);
 		if(aux.desc[0] == '\0'){
-			printf("O campo nome n„o pode ser vazio. \n");	
+			printf("O campo nome n√£o pode ser vazio. \n");	
 		}
 		
 	}while(aux.desc[0] == '\0');
@@ -232,29 +232,29 @@ void cadastrar(Tproduto estoque[], int *tamanho){
 		scanf("%i", &aux.quantidade);
 		fflush(stdin);
 		if(aux.quantidade < 0){
-			printf("A quantidade n„o pode ser negativa.\n");	
+			printf("A quantidade n√£o pode ser negativa.\n");	
 		}
 	}while(aux.quantidade < 0);
 	
 	
 	// Categoria do produto
 	do{
-		printf("Categoria:\n[1] refeiÁ„o\n[2] bebidas\n[3] sobremesas\n");
+		printf("Categoria:\n[1] refei√ß√£o\n[2] bebidas\n[3] sobremesas\n");
 		printf("Selecione uma Categoria--------------------: ");
 		scanf("%i", &aux.categoria);
 		fflush(stdin);
 		if(aux.categoria != 1 && aux.categoria != 2 && aux.categoria != 3)
-			printf("Digite uma categoria v·lida\n");
+			printf("Digite uma categoria v√°lida\n");
 	}while(aux.categoria != 1 && aux.categoria != 2 && aux.categoria != 3);
 	
 	
-	// Valor unit·rio do produto
+	// Valor unit√°rio do produto
 	do{
-		printf("Valor unit·rio-----------------------------: ");
+		printf("Valor unit√°rio-----------------------------: ");
 		scanf("%f", &aux.valorUnitario);
 		fflush(stdin);
 		if(aux.valorUnitario < 0){
-			printf("O valor unit·rio n„o pode ser negativo.\n");
+			printf("O valor unit√°rio n√£o pode ser negativo.\n");
 		}
 	}while(aux.valorUnitario < 0);
 	
@@ -262,7 +262,7 @@ void cadastrar(Tproduto estoque[], int *tamanho){
 		
 	
 	int validaCadastro;
-	printf("As informaÁıes est„o corretas?\n 1 - Sim   0 - N„o \n");
+	printf("As informa√ß√µes est√£o corretas?\n 1 - Sim   0 - N√£o \n");
 	scanf("%i", &validaCadastro);
 	fflush(stdin);
 	if(validaCadastro == 1){
@@ -277,24 +277,19 @@ void cadastrar(Tproduto estoque[], int *tamanho){
 }
 
 
-//FunÁ„o de relatÛrio geral
+//Fun√ß√£o de relat√≥rio geral
 void relatorioGeral(Tproduto estoque[], int *tamanho){
 	int index, pos, cod;
 	pos = pesquisabinaria(estoque, cod, *tamanho);
 	
 	printf ("\n");
-	printf ("                          *********************     RELAT”RIO GERAL     ********************* \n");
+	printf ("                          *********************     RELAT√ìRIO GERAL     ********************* \n");
 	printf ("\n");
 	printf("-------------------------------------------------------------------------------------------------------------------------\n");
-	printf(" CÛdigo     | Nome                           | EspecificaÁ„o                  | Categoria  | Quantidade  | Valor Unit·rio \n");
+	printf(" C√≥digo     | Nome                           | Especifica√ß√£o                  | Categoria  | Quantidade  | Valor Unit√°rio \n");
 	printf("-------------------------------------------------------------------------------------------------------------------------\n");
 	for(index = 0; index < *tamanho; index++){
 		mostra(estoque, index);
-		
-//		if(index % 2 == 0){
-//			system("pause");
-//			system("cls");
-//		}
 	}
 	printf ("\n");
 	system("pause");
@@ -302,26 +297,26 @@ void relatorioGeral(Tproduto estoque[], int *tamanho){
 }
 
 
-//FunÁ„o de relatÛrio por categoria
+//Fun√ß√£o de relat√≥rio por categoria
 void relatorioCat(Tproduto estoque[], int *tamanho){
 	int index, pos, cod, opc;
 	pos = pesquisabinaria(estoque, cod, *tamanho);
 	printf ("\n");
-	printf ("                        *****************     RELAT”RIO POR CATEGORIA     ***************** \n");
+	printf ("                        *****************     RELAT√ìRIO POR CATEGORIA     ***************** \n");
 	printf ("\n");
 	
 	// Categoria do produto
 	do{
-		printf("Categoria:\n[1] refeiÁ„o\n[2] bebidas\n[3] sobremesas\n");
+		printf("Categoria:\n[1] refei√ß√£o\n[2] bebidas\n[3] sobremesas\n");
 		printf("Selecione uma Categoria------------------: ");
 		scanf("%i", &opc);
 		fflush(stdin);
 		if(opc != 1 && opc != 2 && opc != 3)
-			printf("Digite uma categoria v·lida\n");
+			printf("Digite uma categoria v√°lida\n");
 	}while(opc != 1 && opc != 2 && opc != 3);
 	
 	printf("-------------------------------------------------------------------------------------------------------------------------\n");
-	printf(" CÛdigo    | Nome                           | EspecificaÁ„o                  | Categoria  | Quantidade  | Valor Unit·rio \n");
+	printf(" C√≥digo    | Nome                           | Especifica√ß√£o                  | Categoria  | Quantidade  | Valor Unit√°rio \n");
 	printf("-------------------------------------------------------------------------------------------------------------------------\n");
 	for(index = 0; index < *tamanho; index++){
 		if(estoque[index].categoria == opc){
@@ -334,7 +329,7 @@ void relatorioCat(Tproduto estoque[], int *tamanho){
 }
 
 
-//FunÁ„o de custos do produto
+//Fun√ß√£o de custos do produto
 void custoTotal(Tproduto estoque[], int *tamanho){
 	int index, pos, cod, opc;
 	float valorTotal = 0;
@@ -344,7 +339,7 @@ void custoTotal(Tproduto estoque[], int *tamanho){
 	printf ("            ***********************     CUSTO TOTAL     *********************** \n");
 	printf ("\n");
 	printf("----------------------------------------------------------------------------------------------\n");
-	printf(" CÛdigo     | Nome                           | Quantidade  | Valor Unit·rio     | Total       \n");
+	printf(" C√≥digo     | Nome                           | Quantidade  | Valor Unit√°rio     | Total       \n");
 	printf("----------------------------------------------------------------------------------------------\n");
 	for(index = 0; index < *tamanho; index++){
 		mostraCusto(estoque, index);	
@@ -358,14 +353,14 @@ void custoTotal(Tproduto estoque[], int *tamanho){
 }
 
 
-// FunÁ„o para exibir dados do produto
+// Fun√ß√£o para exibir dados do produto
 void mostra(Tproduto estoque[], int index){
 	printf(" %-12ld %-32s %-32s %-12i %-13i R$ %.2f \n", estoque[index].codigo, estoque[index].nome, estoque[index].desc, estoque[index].categoria, estoque[index].quantidade, estoque[index].valorUnitario);
 	return;
 }
 
 
-// FunÁ„o para exibir custos do produto
+// Fun√ß√£o para exibir custos do produto
 void mostraCusto(Tproduto estoque[], int index){
 	printf(" %-12ld %-32s %-13i R$ %-17.2f R$ %.2f \n", estoque[index].codigo, estoque[index].nome, estoque[index].quantidade, estoque[index].valorUnitario, estoque[index].totalValorProduto);
 	return;
