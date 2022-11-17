@@ -41,9 +41,9 @@ int main(){
     leitura(estoque, &tamanho);// abre o arquivo da base de dados
     do{
         printf ("------------------------------------------------------------\n");
-		printf ("             CONTROLE DE COMPRA - ALIMENTAÇÃO               \n");
-		printf ("------------------------------------------------------------\n");
-		printf ("0 - SAIR\n");
+	printf ("             CONTROLE DE COMPRA - ALIMENTAÇÃO               \n");
+	printf ("------------------------------------------------------------\n");
+	printf ("0 - SAIR\n");
         printf ("1 - Cadastrar\n");
         printf ("2 - Relatório Geral\n");
         printf ("3 - Relatório por categoria\n");
@@ -306,7 +306,8 @@ void relatorioCat(Tproduto estoque[], int *tamanho){
 		if(estoque[index].categoria == opc){
 			mostra(estoque, index);
 		} else {
-			printf ("Não existem produtos nessa categoria\n");	
+			printf ("Não existem produtos nessa categoria\n");
+			break;
 		}
 		
 	}
