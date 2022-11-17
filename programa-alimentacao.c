@@ -18,9 +18,9 @@ typedef struct TProduto{
 void leitura(Tproduto estoque[], int *tamanho);//gera o arquivo .dat na primeira vez
 void gravacao(Tproduto estoque[], int tamanho);// realiza a gravação dos dado no arquivo
 int pesquisa(Tproduto estoque[], int codigo, int *tamanho);// busca e retorna a posição do produto no vetor
-int pesquisabinaria(Tproduto estoque[], int chave, int tamanho);
 int vazio(int tamanho);// função auxiliar para da pesquisa binária
-void ordena(Tproduto estoque[], int tamanho); //ordena o cadastro dos produtos por código
+
+// Cadastros
 void cadastrar(Tproduto estoque[], int *tamanho); //faz o cadastro dos produtos
 
 // Relatorios
@@ -118,27 +118,6 @@ void gravacao(Tproduto estoque[], int tamanho){
 }
 
 
-int pesquisabinaria(Tproduto estoque[], int chave, int tamanho){
-    if(vazio(tamanho)) //vetor vazio
-       return -1;       
-    if (! ordenado){
-        ordena(estoque,tamanho);
-        ordenado=1;
-    }
-    int inicio=0,final=tamanho, meio;
-    while (inicio<=final){
-        meio=(int)(inicio+final)/2;
-        if (estoque[meio].codigo==chave)
-           return meio; // encontrou
-        if (estoque[meio].codigo<chave)
-           inicio=meio+1;
-        else
-           final=meio-1;
-    }
-    return -1; // não encontrou
-}
-
-
 int pesquisa(Tproduto estoque[], int codigo, int *tamanho){
 	if(*tamanho == 0){
 		return -2;
@@ -159,19 +138,6 @@ int vazio(int tamanho){
         return 1;
      }
      return 0;
-}
-
-
-void ordena(Tproduto estoque[], int tamanho){
-	int i,j;
-    Tproduto aux;
-    for(i=0;i<tamanho-1;i++)
-        for(j=i+1;j<tamanho;j++)
-          	if (estoque[i].codigo>estoque[j].codigo){
-              	aux=estoque[i];
-              	estoque[i]=estoque[j];
-              	estoque[j]=aux;
-            }
 }
 
 
@@ -199,6 +165,8 @@ void cadastrar(Tproduto estoque[], int *tamanho){
 	// Verifica se já existe um produto com o mesmo código
 	if(pesquisa(estoque, aux.codigo, tamanho) > 0){
 		printf("\nPRODUTO JA EXISTE\n");
+		system("pause");
+		system("cls");
 		return;	
 	}
 	
@@ -279,14 +247,21 @@ void cadastrar(Tproduto estoque[], int *tamanho){
 
 //Função de relatório geral
 void relatorioGeral(Tproduto estoque[], int *tamanho){
-	int index, pos, cod;
-	pos = pesquisabinaria(estoque, cod, *tamanho);
+	int index, cod;
 	
 	printf ("\n");
 	printf ("                          *********************     RELATÓRIO GERAL     ********************* \n");
 	printf ("\n");
+	
+	if(*tamanho == 0){
+		printf("Arquivo Vazio\n");
+		system("pause");
+		system("cls");
+		return;
+	}
+	
 	printf("-------------------------------------------------------------------------------------------------------------------------\n");
-	printf(" Código     | Nome                           | Especificação                  | Categoria  | Quantidade  | Valor Unitário \n");
+	printf(" Código     | Nome                           | Especificação                  | Categoria  | Quantidade  | Valor Unitário\n");
 	printf("-------------------------------------------------------------------------------------------------------------------------\n");
 	for(index = 0; index < *tamanho; index++){
 		mostra(estoque, index);
@@ -299,11 +274,18 @@ void relatorioGeral(Tproduto estoque[], int *tamanho){
 
 //Função de relatório por categoria
 void relatorioCat(Tproduto estoque[], int *tamanho){
-	int index, pos, cod, opc;
-	pos = pesquisabinaria(estoque, cod, *tamanho);
+	int index, cod, opc;
+
 	printf ("\n");
 	printf ("                        *****************     RELATÓRIO POR CATEGORIA     ***************** \n");
 	printf ("\n");
+	
+	if(*tamanho == 0){
+		printf("Arquivo Vazio\n");
+		system("pause");
+		system("cls");
+		return;
+	}
 	
 	// Categoria do produto
 	do{
@@ -318,10 +300,15 @@ void relatorioCat(Tproduto estoque[], int *tamanho){
 	printf("-------------------------------------------------------------------------------------------------------------------------\n");
 	printf(" Código    | Nome                           | Especificação                  | Categoria  | Quantidade  | Valor Unitário \n");
 	printf("-------------------------------------------------------------------------------------------------------------------------\n");
+	
+	
 	for(index = 0; index < *tamanho; index++){
 		if(estoque[index].categoria == opc){
-			mostra(estoque, index);	
+			mostra(estoque, index);
+		} else {
+			printf ("Não existem produtos nessa categoria\n");	
 		}
+		
 	}
 	printf ("\n");
 	system("pause");
@@ -331,13 +318,20 @@ void relatorioCat(Tproduto estoque[], int *tamanho){
 
 //Função de custos do produto
 void custoTotal(Tproduto estoque[], int *tamanho){
-	int index, pos, cod, opc;
+	int index, cod, opc;
 	float valorTotal = 0;
 	
-	pos = pesquisabinaria(estoque, cod, *tamanho);
 	printf ("\n");
 	printf ("            ***********************     CUSTO TOTAL     *********************** \n");
 	printf ("\n");
+	
+	if(*tamanho == 0){
+		printf("Arquivo Vazio\n");
+		system("pause");
+		system("cls");
+		return;
+	}
+	
 	printf("----------------------------------------------------------------------------------------------\n");
 	printf(" Código     | Nome                           | Quantidade  | Valor Unitário     | Total       \n");
 	printf("----------------------------------------------------------------------------------------------\n");
