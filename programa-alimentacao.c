@@ -158,8 +158,7 @@ void cadastrar(Tproduto estoque[], int *tamanho){
 		
 		if(aux.codigo < 0){
 			printf("O código não pode ser negativo.\n");
-		}	
-		
+		}		
 	}while(aux.codigo < 0);
 	
 	// Verifica se já existe um produto com o mesmo código
@@ -178,7 +177,6 @@ void cadastrar(Tproduto estoque[], int *tamanho){
 		if(aux.nome[0] == '\0'){
 			printf("O campo nome não pode ser vazio. \n");	
 		}
-		
 	}while(aux.nome[0] == '\0');
 	
 	
@@ -190,7 +188,6 @@ void cadastrar(Tproduto estoque[], int *tamanho){
 		if(aux.desc[0] == '\0'){
 			printf("O campo nome não pode ser vazio. \n");	
 		}
-		
 	}while(aux.desc[0] == '\0');
 	
 	
@@ -309,7 +306,6 @@ void relatorioCat(Tproduto estoque[], int *tamanho){
 			printf ("Não existem produtos nessa categoria\n");
 			break;
 		}
-		
 	}
 	printf ("\n");
 	system("pause");
