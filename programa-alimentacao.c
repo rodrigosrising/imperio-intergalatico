@@ -41,9 +41,9 @@ int main(){
     leitura(estoque, &tamanho);// abre o arquivo da base de dados
     do{
         printf ("------------------------------------------------------------\n");
-	printf ("             CONTROLE DE COMPRA - ALIMENTAÇÃO               \n");
-	printf ("------------------------------------------------------------\n");
-	printf ("0 - SAIR\n");
+		printf ("             CONTROLE DE COMPRA - ALIMENTAÇÃO               \n");
+		printf ("------------------------------------------------------------\n");
+		printf ("0 - SAIR\n");
         printf ("1 - Cadastrar\n");
         printf ("2 - Relatório Geral\n");
         printf ("3 - Relatório por categoria\n");
@@ -158,7 +158,8 @@ void cadastrar(Tproduto estoque[], int *tamanho){
 		
 		if(aux.codigo < 0){
 			printf("O código não pode ser negativo.\n");
-		}		
+		}	
+		
 	}while(aux.codigo < 0);
 	
 	// Verifica se já existe um produto com o mesmo código
@@ -177,6 +178,7 @@ void cadastrar(Tproduto estoque[], int *tamanho){
 		if(aux.nome[0] == '\0'){
 			printf("O campo nome não pode ser vazio. \n");	
 		}
+		
 	}while(aux.nome[0] == '\0');
 	
 	
@@ -188,6 +190,7 @@ void cadastrar(Tproduto estoque[], int *tamanho){
 		if(aux.desc[0] == '\0'){
 			printf("O campo nome não pode ser vazio. \n");	
 		}
+		
 	}while(aux.desc[0] == '\0');
 	
 	
@@ -298,14 +301,16 @@ void relatorioCat(Tproduto estoque[], int *tamanho){
 	printf(" Código    | Nome                           | Especificação                  | Categoria  | Quantidade  | Valor Unitário \n");
 	printf("-------------------------------------------------------------------------------------------------------------------------\n");
 	
-	
+	int registro = 0;
 	for(index = 0; index < *tamanho; index++){
 		if(estoque[index].categoria == opc){
 			mostra(estoque, index);
-		} else {
-			printf ("Não existem produtos nessa categoria\n");
-			break;
-		}
+			registro = 1;
+		} 	
+	}
+	
+	if(registro == 0){
+		printf("Não existem produtos nessa categoria\n");
 	}
 	printf ("\n");
 	system("pause");
